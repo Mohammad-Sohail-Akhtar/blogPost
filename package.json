@@ -9,9 +9,15 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "axios": "^1.13.3",
+    "bcryptjs": "^3.0.3",
+    "lucide-react": "^0.563.0",
+    "mongoose": "^9.1.5",
+    "moongose": "^1.0.0",
     "next": "16.1.4",
     "react": "19.2.3",
-    "react-dom": "19.2.3"
+    "react-dom": "19.2.3",
+    "react-hot-toast": "^2.6.0"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
