@@ -6,11 +6,8 @@ import { NextRequest, NextResponse } from "next/server";
 
 connect()
 
-
-
 export async function POST(request:NextRequest) {
     try {
-        console.log("here")
         const reqBody = await request.json();
         const {userName, email, password} = reqBody;
 

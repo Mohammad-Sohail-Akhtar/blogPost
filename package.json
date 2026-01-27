@@ -11,6 +11,7 @@
   "dependencies": {
     "axios": "^1.13.3",
     "bcryptjs": "^3.0.3",
+    "jsonwebtoken": "^9.0.3",
     "lucide-react": "^0.563.0",
     "mongoose": "^9.1.5",
     "moongose": "^1.0.0",
