@@ -60,7 +60,7 @@ const LoginForm = () => {
             setIsLoading(true);
             const response = await axios.post('/api/users/login', user);
             toast.success('Login success')
-            router.push('/')
+            router.push('/profile')
             
         } catch (error:any) {
             console.log('Login Failed', error.message)

@@ -3,8 +3,6 @@
 import SignupForm from '@/components/signupForm/SignupForm';
 import Link from 'next/link';
 
-
-
 export default function SignupPage() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-purple-50 py-12 px-4 sm:px-6 lg:px-8">
