@@ -1,7 +1,17 @@
-import Link from 'next/link'
-import React from 'react'
+'use client'
 
+import { useUser } from '@/context/UserContext'
+import Link from 'next/link'
 const Navbar = () => {
+
+
+    const user = useUser()
+    
+    if (!user) return null
+    
+    const { isLogged, data, loading, logout } = user
+    if (loading) return null
+
   return (
     <header className="sticky top-0 z-50 bg-white shadow-md">
     <div className="container mx-5 px-6 py-4">
@@ -12,8 +22,18 @@ const Navbar = () => {
             </div>
             
             {/* Navigation - with clear spacing */}
+
+            
             <nav className="flex items-center space-x-5 md:space-x-2 lg:space-x-4">
-                <Link 
+                {
+                    isLogged ? (
+                        <>
+                           <p>Welcome, <span className='text-blue-700 font-bold'>{data}</span></p>
+                            <button onClick={logout} className="mx-1 md:mx-2 ml-2 md:ml-4 px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 font-medium transition-all duration-200 shadow-md hover:shadow-lg cursor-pointer">Logout</button>
+                        </>
+                    ) : (
+                        <>
+                          <Link 
                     href='/' 
                     className="mx-1 md:mx-2 px-4 py-3 rounded-lg text-gray-700 hover:text-blue-600 hover:bg-blue-50 font-medium transition-all duration-200"
                 >
@@ -29,17 +49,18 @@ const Navbar = () => {
                 
                 <Link 
                     href='/login' 
-                    className="mx-1 md:mx-2 px-4 py-3 rounded-lg text-gray-700 hover:text-blue-600 hover:bg-blue-50 font-medium transition-all duration-200"
+                    className="mx-1 md:mx-2 ml-2 md:ml-4 px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 font-medium transition-all duration-200 shadow-md hover:shadow-lg"
                 >
                     Login
                 </Link>
+                        </>
+                    )
+                }
                 
-                <Link 
-                    href='/profile' 
-                    className="mx-1 md:mx-2 ml-2 md:ml-4 px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 font-medium transition-all duration-200 shadow-md hover:shadow-lg"
-                >
-                    Profile
-                </Link>
+                       
+                  
+
+                
             </nav>
         </div>
     </div>

@@ -1,6 +1,7 @@
 'use client'
 
 
+import { useUser } from '@/context/UserContext'
 import axios from 'axios'
 import { Lock, Mail } from 'lucide-react'
 import { useRouter } from 'next/navigation'
@@ -20,6 +21,12 @@ const LoginForm = () => {
         email: '',
         password: ''
     })
+
+    const userContext = useUser()
+    if (!userContext) {
+        throw new Error('LoginForm must be used within UserProvider')
+    }
+    const {setIsLogged} = userContext
 
     const [errors, setErrors] = useState<IUser>({})
     const [isLoading, setIsLoading] = useState<boolean>(false)
@@ -69,7 +76,7 @@ const LoginForm = () => {
             setIsLoading(false)
         }
         }
-        
+        setIsLogged(true)
     }
 
   return (

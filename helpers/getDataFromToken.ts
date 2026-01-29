@@ -9,6 +9,8 @@ export const getDataFromToken = (request:NextRequest) =>{
        // eslint-disable-next-line @typescript-eslint/no-explicit-any
        const deCodeToken: any = jwt.verify(token, process.env.TOKEN_SECRET!)
         return deCodeToken.id
+
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
         throw new Error(error.message)
     }
