@@ -14,6 +14,7 @@ interface UserContextType {
     loading: boolean,
     isLogged: boolean,
     setIsLogged: (value: boolean) => void
+    getUserDetails: ()=>void
 }
 
 
@@ -24,13 +25,13 @@ export const UserProvider = ({children}: {children: ReactNode}) => {
     const [data, setData] = useState<string | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
     
-    const [isLogged, setIsLogged] = useState<boolean>(false)
+    const [isLogged, setIsLogged] = useState(false)
 
 
     const router = useRouter()
 
     
-    useEffect(()=>{
+
     const getUserDetails = async ()=>{
         try {
             const res = await axios.get('/api/users/me', { withCredentials: true })
@@ -46,8 +47,8 @@ export const UserProvider = ({children}: {children: ReactNode}) => {
           setLoading(false)
         }
   }
-  getUserDetails()
-  },[])
+
+
 
 
   const logout = async() =>{
@@ -66,7 +67,7 @@ export const UserProvider = ({children}: {children: ReactNode}) => {
 
 
   return(
-    <UserContext.Provider value={{data, loading, logout, isLogged, setIsLogged, setData}}>
+    <UserContext.Provider value={{data, loading, logout, isLogged, setIsLogged, setData, getUserDetails}}>
         {children}
     </UserContext.Provider>
   )

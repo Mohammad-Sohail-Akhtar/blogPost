@@ -4,18 +4,16 @@ import { useUser } from '@/context/UserContext'
 
 const ProfilePage = () => {
 
- const userContext = useUser()
-     if (!userContext) {
-         throw new Error('LoginForm must be used within UserProvider')
-     }
-     const {data} = userContext
+
+    //  const {data} = useUser()
+    //  console.log(data)
 
   return (
     <>
       <div>ProfilePage</div>
       <hr />
       <p>Profile</p>
-      <h1>Username: {data}</h1>
+      {/* <h1>Username: {data}</h1> */}
       <hr />
       {/* <button onClick={logout} className='bg-blue-500 mt-4 p-3'>Logout</button> */}
         &nbsp;  &nbsp;  

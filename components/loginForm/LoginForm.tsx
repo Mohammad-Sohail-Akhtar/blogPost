@@ -26,7 +26,7 @@ const LoginForm = () => {
     if (!userContext) {
         throw new Error('LoginForm must be used within UserProvider')
     }
-    const {setIsLogged} = userContext
+    const { getUserDetails } = userContext
 
     const [errors, setErrors] = useState<IUser>({})
     const [isLoading, setIsLoading] = useState<boolean>(false)
@@ -67,7 +67,10 @@ const LoginForm = () => {
             setIsLoading(true);
             const response = await axios.post('/api/users/login', user);
             toast.success('Login success')
+            getUserDetails()
             router.push('/profile')
+            
+
             
         } catch (error:any) {
             console.log('Login Failed', error.message)
@@ -76,8 +79,10 @@ const LoginForm = () => {
             setIsLoading(false)
         }
         }
-        setIsLogged(true)
+       
     }
+
+    
 
   return (
     <>
