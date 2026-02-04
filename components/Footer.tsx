@@ -53,7 +53,7 @@ export default function Footer() {
                   All Posts
                 </Link>
               </li>
-              <li>
+              {/* <li>
                 <Link href="/categories" className="text-gray-400 hover:text-white transition duration-200">
                   Categories
                 </Link>
@@ -67,7 +67,7 @@ export default function Footer() {
                 <Link href="/contact" className="text-gray-400 hover:text-white transition duration-200">
                   Contact
                 </Link>
-              </li>
+              </li> */}
             </ul>
           </div>
           

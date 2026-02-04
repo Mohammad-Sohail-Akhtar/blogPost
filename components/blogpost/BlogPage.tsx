@@ -1,62 +1,70 @@
-import BlogGrid from '@/components/blogpost/BlogGrid';
-import Link from 'next/link';
-import React from 'react';
-// import BlogGrid from './BlogGrid';
+'use client'
 
-const MOCK_POSTS = [
-  {
-    id: 1,
-    title: "The Future of React in 2026",
-    excerpt: "Exploring the new paradigms of Server Components and the evolving ecosystem of web development.",
-    author: "Sarah Drasner",
-    date: "Jan 28, 2026",
-    category: "Development",
-    imageUrl: "https://images.unsplash.com/photo-1633356122544-f134324a6cee?q=80&w=800",
-  },
-  {
-    id: 2,
-    title: "Designing for Cognitive Load",
-    excerpt: "How to create user interfaces that feel intuitive by understanding how the human brain processes information.",
-    author: "Marcus Aurelius",
-    date: "Jan 25, 2026",
-    category: "UI/UX",
-    imageUrl: "https://images.unsplash.com/photo-1558655146-d09347e92766?q=80&w=800",
-  },
-  {
-    id: 3,
-    title: "Sustainable Tech Stack",
-    excerpt: "Why choosing energy-efficient hosting and optimized code is becoming a priority for modern startups.",
-    author: "Elena Fisher",
-    date: "Jan 22, 2026",
-    category: "Sustainability",
-    imageUrl: "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?q=80&w=800",
-  }
-];
+import axios from "axios";
+import { useEffect, useState } from "react";
+
+
+interface BlogData {
+  _id: number,
+  title: string,
+  description: string,
+  author: string,
+  image: string | null,
+  date: string,
+  day: string
+}
 
 const BlogPage = () => {
+  
+const [blogs, setBlogs] = useState<BlogData[]>([]);
+
+
+  
+
+  useEffect(()=>{
+    const blogPostData = async() => {
+    const response = await axios.get('/api/users/getblogpost')
+    const result = response.data.formattedBlogs;
+    console.log(result,'here')
+    setBlogs(result);
+  }
+  blogPostData()
+  },[])
+
   return (
     <main className="bg-white py-16 sm:py-24">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        {/* Header Section */}
-        <div className="mx-auto max-w-2xl text-center">
-          <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-            Latest Stories
-          </h2>
-          <p className="mt-4 text-lg leading-8 text-gray-600">
-            Expert advice and technical deep-dives from our engineering team.
-          </p>
-        </div>
+        <h1 className="text-2xl mb-8">Getting the blogs</h1>
 
-        {/* Modular Grid */}
-        <BlogGrid posts={MOCK_POSTS} />
-        
-        {/* Pagination/Load More Placeholder */}
-        <div className="mt-16 text-center">
-            <Link href='/post'>
-            <button className="rounded-md bg-indigo-600 px-6 py-3 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 transition-colors cursor-pointer">
-            View all posts
-          </button></Link>
-          
+        <div className="grid gap-6">
+          {blogs?.map((item) => (
+            <div key={item?._id} className="border p-4 rounded-lg">
+              
+              {item.image && (
+                <img
+                  src={item?.image}
+                  alt={item?.title}
+                  className="w-full h-60 object-cover rounded"
+                />
+              )}
+
+              <h2 className="text-xl font-semibold mt-3">
+                {item?.title}
+              </h2>
+
+              <p className="text-gray-600">{item?.description}</p>
+
+              <p className="text-sm mt-2">
+                ✍️ {item?.author}
+              </p>
+
+              <p className="text-xs text-gray-500">
+                {item.day},{" "}
+                {new Date(item?.date).toLocaleDateString()} —{" "}
+                {new Date(item?.date).toLocaleTimeString()}
+              </p>
+            </div>
+          ))}
         </div>
       </div>
     </main>
